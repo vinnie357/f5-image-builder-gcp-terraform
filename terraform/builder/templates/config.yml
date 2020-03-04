@@ -1,0 +1,22 @@
+# Sample F5 BIGIP Image Generator config file
+
+UPDATE_IMAGE_FILES:
+    -  source: "/home/xadmin/.ssh/authorized_keys"
+       destination: "/home/xadmin/.ssh/authorized_keys"
+    # -  source: "/var/tmp/trusted-ca.pem"
+    #    destination: "/config/ssl/ssl.crt/trusted-ca.pem"
+    # -  source: "/var/tmp/custom-file"
+    #    destination: "/config/custom-file"
+    -  source: "/var/tmp/downloads/f5-declarative-onboarding-1.10.0-2.noarch.rpm"
+       destination: "/var/config/rest/downloads/f5-declaritive-onboarding.rpm"
+    -  source: "/var/tmp/downloads/f5-appsvcs-3.17.1-1.noarch.rpm"
+       destination: "/var/config/rest/downloads/f5-appsvcs.noarch.rpm"
+
+AWS_BUCKET: "my-bucket-name"
+AWS_REGION: "us-east-1"
+
+AZURE_STORAGE_CONTAINER_NAME: "my-storage-container-name"
+
+GCE_BUCKET: "${bucket}"
+GOOGLE_APPLICATION_CREDENTIALS: ""
+#Key [GOOGLE_APPLICATION_CREDENTIALS] is required for platform [gce]!
