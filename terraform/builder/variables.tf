@@ -1,4 +1,11 @@
 # device
+variable "sa_file" {
+  description = "service account creds for builder tasks"
+}
+variable "sa_name" {
+  description = "service account name for builder tasks"
+}
+
 variable "projectPrefix" {
   description = "prefix for resources"
 }

@@ -1,6 +1,8 @@
 # custom
 mygcloud
-
+isos
+onboard-debug-bash.sh
+config-debug.yaml
 # Local .terraform directories
 **/.terraform/*
 

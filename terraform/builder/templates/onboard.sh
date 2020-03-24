@@ -94,7 +94,7 @@ done
 git init
 git clone https://github.com/f5devcentral/f5-bigip-image-generator.git
 cd f5-bigip-image-generator
-git checkout v1.0
+git checkout v${builderVersion}
 ./setup-build-env --add-dev-tools
 
 # builder config
@@ -104,5 +104,5 @@ EOF
 
 # download atc
 getAtc
-echo "done"
+echo "=====done====="
 exit

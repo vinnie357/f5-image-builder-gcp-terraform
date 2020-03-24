@@ -43,12 +43,18 @@ resource "google_storage_bucket" "builder-images" {
     not_found_page   = "404.html"
   }
 }
+resource "google_storage_bucket_access_control" "builder-images-rule" {
+  bucket = google_storage_bucket.builder-images.name
+  role   = "OWNER"
+  entity = "user-${var.sa_name}"
+}
 
 data "template_file" "builder_config" {
   template = "${file("${path.root}/builder/templates/config.yml")}"
 
   vars = {
       bucket = "${google_storage_bucket.builder-images.name}"
+      saCreds = "${var.sa_file}"
   }
 }
 data "template_file" "vm_onboard" {
@@ -57,6 +63,7 @@ data "template_file" "vm_onboard" {
   vars = {
     uname        	      = "${var.adminAccountName}"
     upassword        	  = "${var.adminPass}"
+    builderVersion        = "1.4.0"
     doVersion             = "latest"
     #example version:
     #as3Version            = "3.16.0"
@@ -117,8 +124,8 @@ resource "google_compute_instance" "vm_instance" {
   }
     service_account {
     # https://cloud.google.com/sdk/gcloud/reference/alpha/compute/instances/set-scopes#--scopes
-    # email = "${var.service_accounts.compute}"
-    scopes = [ "storage-ro", "logging-write", "monitoring-write", "monitoring", "pubsub", "service-management" , "service-control" ]
+    email = "${var.sa_name}"
+    scopes = [ "storage-rw", "logging-write", "monitoring-write", "monitoring", "pubsub", "service-management" , "service-control" ]
     # scopes = [ "storage-ro"]
   }
 

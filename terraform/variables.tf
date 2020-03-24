@@ -81,3 +81,16 @@ variable "GCP_CREDS_FILE" {
   description = "creds file from vault"
   default = "none"
 }
+# https://cloud.google.com/sdk/gcloud/reference/beta/iam/roles/list
+# Sufficient permissions to create or describe the following resources:
+#- Credentials/API Keys
+#- Application credentials
+#- Storage Container
+
+variable "service_account_iam_roles" {
+  type = list(string)
+  default = [
+    "roles/storage.admin",
+  ]
+  description = "List of IAM roles to assign to the service account."
+}
